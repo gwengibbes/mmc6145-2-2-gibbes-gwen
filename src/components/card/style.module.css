@@ -1,0 +1,74 @@
+.card {
+  border-radius: 5px;
+  width: 150px;
+  height: 200px;
+  position: relative;
+  transition: transform 700ms;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  margin: 10px;
+  user-select: none;
+}
+
+.card > div {
+  position: absolute;
+  width: 100%;
+  padding-top: 20px;
+  border: 1px solid black;
+  border-radius: 5px;
+  box-sizing: border-box;
+  height: 100%;
+  text-align: center;
+  background-color: white;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  box-shadow: 3px 3px 6px rgb(19, 19, 19);
+  font-size: 3rem;
+}
+
+.card .cardBack {
+  --rotation: 45deg;
+  padding: 0;
+  transform: rotateY(180deg);
+  font-size: 3rem;
+  font-family: serif;
+  font-weight: 900;
+  color: transparent;
+  text-shadow: 0 0 0 #ffffffdd;
+  background-image: linear-gradient(
+    var(--rotation),
+    #000789,
+    #000789 8%,
+    white 8%,
+    white 10%,
+    #ff7c00 10%,
+    #ff7c00 20%,
+    white 20%,
+    white 22%,
+    #000789 22%,
+    #0007aa 78%,
+    white 78%,
+    white 80%,
+    #ff7c00 80%,
+    #ff7c00 90%,
+    white 90%,
+    white 92%,
+    #0007aa 92%
+  );
+  line-height: 3.75;
+  border: none;
+}
+
+@media screen and (max-width: 700px) {
+  .card {
+    height: 100px;
+    width: 75px;
+  }
+  .card > div {
+    font-size: 1.5rem;
+  }
+  .card .cardBack {
+    font-size: 1.5rem;
+  }
+}

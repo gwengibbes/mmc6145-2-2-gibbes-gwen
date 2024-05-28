@@ -1,0 +1,48 @@
+.modal {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 200ms;
+
+  /* darken the rest of the page */
+  background-color: rgba(0,0,0,0.5);
+
+  /* cover the whole screen */
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  /* position modal in the middle of screen */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal.showModal {
+  visibility: visible;
+  opacity: 1;
+}
+.modal.showModal .modalCard {
+  transform: none;
+  opacity: 1;
+}
+
+.modal .modalCard {
+  opacity: 0;
+  transform: translateY(-200px);
+  transition: transform 200ms, opacity 500ms;
+  max-width: 400px;
+  background-color: white;
+  padding: 24px;
+  box-shadow: 4px 4px 12px rgba(0,0,0,0.75);
+}
+
+/* button that closes modal */
+.modalCard button {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  font-size: 2rem;
+  float: right;
+}

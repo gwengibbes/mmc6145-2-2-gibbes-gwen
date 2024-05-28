@@ -1,0 +1,6 @@
+.playfield {
+  perspective: 800px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
