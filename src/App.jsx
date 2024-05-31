@@ -6,7 +6,7 @@ import { useTimer } from "./util/customHooks";
 
 export default function App() {
   const [showModal, setShowModal] = useState(false);
-  let currentTime = null 
+  const [currentTime, setCurrentTime] = useState(null); 
   const {
     time,
     start: timerStart,
@@ -15,7 +15,7 @@ export default function App() {
   } = useTimer({
     //Utilize the useTimer custom hook
     ontimeupdate:(t)=>{
-      currentTime = t;
+      //currentTime = t;
     }
   });
 
@@ -28,29 +28,34 @@ export default function App() {
     "Duck 🦆",
   ];
 
-  let bestTime = null
-  let previousTime = null
+  const [bestTime, setBestTime] = useState(null);
+  const [previousTime, setPreviousTime] = useState(null);
+  let completionTimes = []
 
   //function that starts the timer when the game starts.
   const gameStarted = () => {
      //reset the timer to 0, 
     timerReset();
- //start the timer
- timerStart();
- currentTime=time;
- console.log ("Game started")
+    //start the timer
+    timerStart();
+    //currentTime = time;
+    setCurrentTime(3)
   }
 
   //function that starts the timer when the game ends.
   const gameEnded = () => {
     //stop the timer
-    timerStop();
-    //store current time to an array
-    //[30, 45, 35]
-    //update previous time
-    //get the smallest value in the array to update the best time
-    console.log ("Game ended")
-     }
+      timerStop();
+      const currentTime = time;
+      //store current time to an array
+      completionTimes.push(time);
+      //update previous time
+      if (completionTimes.length >= 2){
+        setPreviousTime(completionTimes[completionTimes.length-2]);
+      };
+      //get the smallest value in the array to update the best time
+      setBestTime(Math.min (...completionTimes));
+  }
 
   return (
     <>
