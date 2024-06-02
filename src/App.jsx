@@ -6,17 +6,12 @@ import { useTimer } from "./util/customHooks";
 
 export default function App() {
   const [showModal, setShowModal] = useState(false);
-  const [currentTime, setCurrentTime] = useState(null); 
   const {
     time,
     start: timerStart,
     stop: timerStop,
     reset: timerReset,
   } = useTimer({
-    //Utilize the useTimer custom hook
-    ontimeupdate:(t)=>{
-      //currentTime = t;
-    }
   });
 
   const cardTexts = [
@@ -30,31 +25,23 @@ export default function App() {
 
   const [bestTime, setBestTime] = useState(null);
   const [previousTime, setPreviousTime] = useState(null);
-  let completionTimes = []
 
   //function that starts the timer when the game starts.
   const gameStarted = () => {
-     //reset the timer to 0, 
-    timerReset();
     //start the timer
     timerStart();
-    //currentTime = time;
-    setCurrentTime(3)
   }
 
   //function that starts the timer when the game ends.
   const gameEnded = () => {
     //stop the timer
       timerStop();
-      const currentTime = time;
-      //store current time to an array
-      completionTimes.push(time);
-      //update previous time
-      if (completionTimes.length >= 2){
-        setPreviousTime(completionTimes[completionTimes.length-2]);
-      };
+      //set previous time
+      setPreviousTime(time);
       //get the smallest value in the array to update the best time
-      setBestTime(Math.min (...completionTimes));
+      setBestTime(Math.min (bestTime ?? time, time));
+         //reset the timer to 0, 
+      timerReset();
   }
 
   return (
@@ -64,7 +51,7 @@ export default function App() {
         openModal={() => setShowModal(true)}
         bestTime={bestTime}
         previousTime={previousTime}
-        time={currentTime}
+        time={time}
       />
       <CardGame
         // add onGameStart, onGameEnd props
